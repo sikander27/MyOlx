@@ -137,3 +137,26 @@ class Photo(BaseModel):
 
 #     def __str__(self):
 #         return self.attr_name
+
+
+class TwilioWhatsAppMessage(BaseModel):
+    twilio_msg_id = models.CharField(max_length=255, unique=True)
+    body = models.TextField()
+    sender = models.CharField(max_length=20)
+    receiver = models.CharField(max_length=20)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    edited = models.BooleanField('Edited', default=False)
+
+    def __str__(self) -> str:
+        return f"{self.sender} -> {self.receiver} --> {self.body}"
+    
+class InfluencerWhatsAppMessage(BaseModel):
+    twilio_msg_id = models.CharField(max_length=255, unique=True)
+    body = models.TextField()
+    influencer = models.CharField(max_length=20) # can be a foreign key too
+    timestamp = models.DateTimeField(auto_now_add=True)
+    is_sender = models.BooleanField('Is Sender', default=False)
+    edited = models.BooleanField('Edited', default=False)
+
+    def __str__(self) -> str:
+        return f"{self.body} -> {self.influencer} --> {self.is_sender}"

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.apps import apps
-from .models import Ad, Spec, Category
+from .models import Ad, Spec, Category, TwilioWhatsAppMessage, InfluencerWhatsAppMessage
 
 app = apps.get_app_config('ads')
 
@@ -31,3 +31,7 @@ class AdAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at', 'updated_at')
     list_display = ('title', 'price', 'sold')
     # inlines = (SpecInline,)
+
+
+admin.site.register(TwilioWhatsAppMessage)
+admin.site.register(InfluencerWhatsAppMessage)
